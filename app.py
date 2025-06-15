@@ -3,7 +3,7 @@ import logging
 from datetime import datetime
 
 app = Flask(__name__)
-# app.secret_key = 'your-secret-key-here'  # Required for flash messages
+app.secret_key = 'my-secret-key'  # Required for flash messages
 
 # Configure logging
 logging.basicConfig(
@@ -18,7 +18,7 @@ VALID_PASSWORD = "password123"
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -29,10 +29,11 @@ def login():
         if username == VALID_USERNAME and password == VALID_PASSWORD:
             logging.info(f"Successful login attempt - Username: {username}")
             flash('Login successful!', 'success')
-            return redirect(url_for('home'))
+            return render_template('success.html')
         else:
             logging.warning(f"Failed login attempt - Username: {username}")
             flash('Invalid username or password', 'error')
+            
     
     return render_template('login.html')
 
