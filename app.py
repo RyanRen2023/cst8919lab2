@@ -31,10 +31,12 @@ def login():
         
         if username == VALID_USERNAME and password == VALID_PASSWORD:
             logging.info(f"Successful login attempt - Username: {username}")
+            print(f"Successful login attempt - Username: {username}")
             flash('Login successful!', 'success')
             return render_template('success.html')
         else:
             logging.warning(f"Failed login attempt - Username: {username}")
+            print(f"Failed login attempt - Username: {username}")
             flash('Invalid username or password', 'error')
             
     
