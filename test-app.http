@@ -1,13 +1,4 @@
 ## Azure test
-### Test Home Page
-GET https://lab2login-anh5c9eng9gsbka0.canadacentral-01.azurewebsites.net
-Accept: text/html
-
-
-### Test Login Page
-GET https://lab2login-anh5c9eng9gsbka0.canadacentral-01.azurewebsites.net/login
-Accept: text/html
-
 ### Test Login with Invalid Credentials
 POST https://lab2login-anh5c9eng9gsbka0.canadacentral-01.azurewebsites.net/login
 Content-Type: application/x-www-form-urlencoded
@@ -22,15 +13,10 @@ Accept: text/html
 
 username=admin&password=password123
 
-### Test Home Page
-GET https://lab2login-anh5c9eng9gsbka0.canadacentral-01.azurewebsites.net
-Accept: text/html
 
 
+## ================================
 ## local test
-### Test Login Page
-GET http://localhost:8000/login
-Accept: text/html
 
 ### Test Login with Invalid Credentials
 POST http://localhost:8000/login
@@ -45,3 +31,8 @@ Content-Type: application/x-www-form-urlencoded
 Accept: text/html
 
 username=admin&password=password123
+
+
+### Test Login with Valid Credentials
+get http://localhost:8000/server-info
+Content-Type: application/x-www-form-urlencoded
