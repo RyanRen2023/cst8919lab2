@@ -1,10 +1,40 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, flash
+import logging
+from datetime import datetime
 
 app = Flask(__name__)
+# app.secret_key = 'your-secret-key-here'  # Required for flash messages
+
+# Configure logging
+logging.basicConfig(
+    filename='login_attempts.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+# Dummy user credentials for demonstration
+VALID_USERNAME = "admin"
+VALID_PASSWORD = "password123"
 
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        if username == VALID_USERNAME and password == VALID_PASSWORD:
+            logging.info(f"Successful login attempt - Username: {username}")
+            flash('Login successful!', 'success')
+            return redirect(url_for('home'))
+        else:
+            logging.warning(f"Failed login attempt - Username: {username}")
+            flash('Invalid username or password', 'error')
+    
+    return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True) 
