@@ -61,7 +61,7 @@ def login():
             # Multiple logging methods to ensure it works
             message = f"Successful login attempt - Username: {username}"
             app.logger.info(message)
-            print(message, file=sys.stderr, flush=True)
+            print(message, file=sys.stdout, flush=True)
             
             flash('Login successful!', 'success')
             return render_template('success.html')
