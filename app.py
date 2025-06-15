@@ -6,12 +6,14 @@ import sys
 app = Flask(__name__)
 app.secret_key = 'my-secret-key'  # Required for flash messages
 
-# Configure logging
-logging.basicConfig(
-    stream=sys.stdout,
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+# Configure logging to ensure output goes to the console in Azure
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+handler = logging.StreamHandler(sys.stdout)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+if not logger.hasHandlers():
+    logger.addHandler(handler)
 
 # Dummy user credentials for demonstration
 VALID_USERNAME = "admin"
