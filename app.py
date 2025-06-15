@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import logging
 from datetime import datetime
+import sys
 
 app = Flask(__name__)
 app.secret_key = 'my-secret-key'  # Required for flash messages
 
 # Configure logging
 logging.basicConfig(
-    filename='login_attempts.log',
+    stream=sys.stdout,
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
